@@ -6,12 +6,15 @@ object Main extends cask.MainRoutes {
   messages += Message("John Smith", 0, "Hello, world!")
 
   @cask.get("/")
-  def get() = upickle.default.write(messages, indent = 2) // indent = 2 to pretty-print
+  def get() = Templates.page(messages.toList).render
 
   @cask.postJson("/")
   def post(message: Message) = {
     messages += message
   }
+
+  @cask.staticResources("/assets")
+  def statics() = "assets"
 
   initialize()
 }
