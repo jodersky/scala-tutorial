@@ -1,4 +1,4 @@
-import mill._, scalalib._, scalajslib._
+import mill._, scalalib._, scalajslib._, scalanativelib._
 
 trait Shared extends ScalaModule {
   def sharedSources = T.sources(build.millSourcePath / "shared")
@@ -45,4 +45,9 @@ object webapp extends ScalaJSModule with Shared {
     PathRef(T.ctx().dest)
   }
 
+}
+
+object cli extends ScalaNativeModule {
+  def scalaVersion = "2.11.12" // scala native does not support newer versions yet
+  def scalaNativeVersion = "0.3.8"
 }
