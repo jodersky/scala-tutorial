@@ -1,7 +1,7 @@
+import scalatags.generic.Bundle
 
-import scalatags.Text.all._
-
-object Templates {
+class Templates[Builder, Output <: FragT, FragT](val backend: Bundle[Builder, Output, FragT]) {
+  import backend.all._
 
   def message(msg: Message): Tag = {
     div(cls := "col-xs-12 col-sm-6 col-md-3 col-lg-2")(
@@ -59,7 +59,7 @@ object Templates {
         raw(
           """|document.addEventListener("DOMContentLoaded", function(event) {
              |  console.info("Starting ScalaJS application...")
-             |  Main.func() // run ScalaJS application
+             |  Main.main() // run ScalaJS application
              |})
              |""".stripMargin
         )
